@@ -1,6 +1,7 @@
 package rapidresponse.backend.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import rapidresponse.backend.model.Report;
@@ -16,8 +17,11 @@ public class ReportService {
     @Autowired
     private ReportRepository reportRepository;
 
+    @Value("${ai.service.url}")
+    private String AI_SERVICE_URL;
+
     private final RestTemplate restTemplate = new RestTemplate();
-    private final String AI_SERVICE_URL = "http://localhost:5000/classify";
+    
 
     public Report createReport(Report report) {
         classifyReport(report);

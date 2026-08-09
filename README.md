@@ -72,18 +72,22 @@ The project is built around two distinct journeys designed for two very differen
 
 ## System Architecture
 
-React (Vercel)
-│ REST API
-▼
-Spring Boot Backend (Render)
-│
-┌─────┴─────┐
-▼ ▼
-MySQL Python AI Microservice
-(Railway) (Render)
+**Frontend** (React, hosted on Vercel) → **Backend API** (Spring Boot, hosted on Render) → **Database** (MySQL, hosted on Railway)
+
+The backend also communicates with a separate **AI Microservice** (Python/Flask, hosted on Render) for report classification.
+
+**Request flow when a report is submitted:**
+
+1. React frontend sends the report to the Spring Boot REST API
+2. Backend calls the Python AI microservice to classify category and priority
+3. Backend saves the classified report to MySQL
+4. If the AI microservice is unreachable, the backend falls back to rule-based classification automatically
+
+The backend itself follows a layered architecture — **Controller → Service → Repository** — keeping request handling, business logic, and data access cleanly separated.
 
 
-The backend follows a layered architecture (Controller → Service → Repository) and communicates with the AI microservice over REST. Classification logic is decoupled from the core application so the ML component can be retrained or replaced independently.
+
+
 
 <p align="center">
 <img src="./screenshots/report-form.png" width="32%" alt="Report form" />

@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-const API_BASE = 'http://localhost:8080/api'
+const API_BASE = 'https://rapidresponse-backend-uskf.onrender.com/api'
 
 export const createReport = (reportData) => {
   return axios.post(`${API_BASE}/reports`, reportData)

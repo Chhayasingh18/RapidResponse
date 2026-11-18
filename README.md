@@ -47,7 +47,7 @@ The project is built around two distinct journeys designed for two very differen
 
 **📖 Visual safety guides** — quick, scannable do's and don'ts for flood, fire, earthquake, and cyclone, available in all three supported languages.
 
-**🔐 Secure authentication** — JWT-based volunteer login and registration, with BCrypt password hashing and protected routes.
+**Volunteer account flow** — registration and login endpoints that hash passwords with BCrypt and return JWT tokens. The current API security configuration does not yet enforce JWT-protected routes, so authorization remains an improvement area.
 
 **🛡️ Fault-tolerant classification** — if the AI microservice is ever unreachable, the backend automatically falls back to a rule-based classifier rather than failing the request, so the core emergency-reporting flow never breaks.
 
@@ -101,7 +101,7 @@ The backend itself follows a layered architecture — **Controller → Service �
 
 This was designed and built end-to-end as a solo full-stack + AI project:
 
-- Designed and implemented the full REST API in Spring Boot, including JWT authentication, role-based access considerations, and a layered service architecture
+- Implemented report and account REST endpoints in Spring Boot using a layered service architecture; registration/login handlers hash passwords with BCrypt and generate JWT tokens.
 - Trained a multilingual text classification model from scratch using scikit-learn, including dataset curation and class-imbalance handling
 - Built the entire frontend UI/UX from the ground up — including two distinct role-based interfaces, multilingual support, and a mobile-first responsive design
 - Containerized and deployed all three services independently (Vercel, Render, Railway), with environment-based configuration for local vs. production
